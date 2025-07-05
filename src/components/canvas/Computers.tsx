@@ -3,8 +3,8 @@ import { useGLTF, Preload, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useState } from "react";
 import CanvasLoader from "../Loader";
+import { ErrorBoundary } from "react-error-boundary";
 
-// --- Component for the computer model ---
 const Computers = ({ isMobile }: { isMobile: boolean }) => {
   const computer = useGLTF("./desktop_pc/scene.gltf");
 
@@ -33,40 +33,49 @@ const Computers = ({ isMobile }: { isMobile: boolean }) => {
   );
 };
 
-// --- Main canvas component ---
+const FallbackMessage = () => (
+  <div className="text-center text-gray-500 mt-10">3D Model failed to load.</div>
+);
+
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [showCanvas, setShowCanvas] = useState(false);
 
   useEffect(() => {
+    setShowCanvas(true); // Delays rendering until after hydration
+
     const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
     checkIsMobile();
-
     window.addEventListener("resize", checkIsMobile);
     return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
 
   return (
     <div className="w-full h-screen">
-      <Canvas
-        frameloop="demand"
-        shadows
-        camera={{
-          position: [20, 3, 5],
-          fov: 30,
-        }}
-        gl={{ preserveDrawingBuffer: true }}
-        className="w-full h-full"
-      >
-        <Suspense fallback={<CanvasLoader />}>
-          <OrbitControls
-            enableZoom={false}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-          />
-          <Computers isMobile={isMobile} />
-        </Suspense>
-        <Preload all />
-      </Canvas>
+      {showCanvas && (
+        <Canvas
+          frameloop="demand"
+          shadows
+          camera={{
+            position: [20, 3, 5],
+            fov: 30,
+          }}
+          gl={{ preserveDrawingBuffer: false }} // better for mobile
+          className="w-full h-full"
+        >
+          <Suspense fallback={<CanvasLoader />}>
+            <ErrorBoundary fallback={<FallbackMessage />}>
+              <OrbitControls
+                enableZoom={false}
+                maxPolarAngle={Math.PI / 2}
+                minPolarAngle={Math.PI / 2}
+              />
+              <Computers isMobile={isMobile} />
+            </ErrorBoundary>
+          </Suspense>
+          <Preload all />
+        </Canvas>
+      )}
     </div>
   );
 };
