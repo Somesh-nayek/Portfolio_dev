@@ -3,51 +3,17 @@ import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import SectionWrapper from "../hoc/SectionWrapper";
 import { slideIn } from "../utils/motion";
-import { useRef, useState } from "react";
+import { useRef} from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import emailjs from "emailjs-com";
+// import emailjs from "emailjs-com";
 const Contact = () => {
   const form = useRef<HTMLFormElement | null>(null);
-  const reCaptchaRef = useRef<ReCAPTCHA | null>(null);
-  const [loading, setLoading] = useState(false);
-  const service_id=import.meta.env.VITE_SERVICE_ID;
-  const template_id=import.meta.env.VITE_TEMPLATE_ID;
-  const public_key=import.meta.env.VITE_PUBLIC_ID;
-  const reCaptchaOnChange =async (token: string | null) => {
-    const formData = {
-      name: (form.current?.elements.namedItem("name") as HTMLInputElement)?.value,
-      email: (form.current?.elements.namedItem("email") as HTMLInputElement)?.value,
-      message: (form.current?.elements.namedItem("message") as HTMLTextAreaElement)?.value,
-      privacy: (form.current?.elements.namedItem("privacy") as HTMLInputElement)?.checked,
-      "g-recaptcha-response": token,
-    };
-
-    setLoading(true);
-
-    await emailjs
-      .send(
-        service_id!,
-        template_id!,
-        formData,
-        public_key!
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          setLoading(false);
-          reCaptchaRef.current?.reset();
-        },
-        (error: Error) => {
-          console.log(error.message);
-          setLoading(false);
-        }
-      );
-  };
-  const sendEmail =(e: React.FormEvent) => {
-    e.preventDefault();
-    reCaptchaRef.current?.execute();
-  };
-
+  // const service_id=import.meta.env.VITE_SERVICE_ID;
+  // const template_id=import.meta.env.VITE_TEMPLATE_ID;
+  // const public_key=import.meta.env.VITE_PUBLIC_ID;
+  const handleChange=(value)=>{
+    console.log("Captcha value:", value);
+  }
   return (
     <div className="xl:mt-12 xl:flex-row flex-col-reverse flex gap-2 overflow-hidden">
       <motion.div
@@ -58,7 +24,7 @@ const Contact = () => {
         <h3 className={`${styles.sectionHeadText}`}>Contact.</h3>
         <form
           ref={form}
-          onSubmit={sendEmail}
+          // onSubmit={sendEmail}
           className="mt-12 flex flex-col gap-8"
         >
           <label className="flex flex-col">
@@ -88,13 +54,10 @@ const Contact = () => {
               className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
             />
           </label>
-          <p>privacy policy</p>
           <div className="flex flex-col">
             <ReCAPTCHA
-              ref={reCaptchaRef}
-              sitekey="6Ld1WxorAAAAAIiKeGKxEKcbmZZSZv8T2naTGr0z"
-              size="invisible"
-              onChange={reCaptchaOnChange}
+            sitekey="6LcRrBorAAAAAJooxkEkA4i5UKtyCNrOGXP9kSTd"
+            onChange={handleChange}
             />
           </div>
           <button
@@ -102,7 +65,6 @@ const Contact = () => {
             className={`py-3 bg-[#b7a7b6] px-8 outline-none w-fit text-white shadow-md font-bold
              shadow-primary rounded-xl`}
           >
-            {loading ? "Sending..." : "Send"}
           </button>
         </form>
       </motion.div>
