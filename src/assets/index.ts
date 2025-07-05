@@ -29,8 +29,17 @@ import gdsc from './company/gdsc.png';
 import leetcode from './company/leetcode.png';
 import sbh from './company/sbh.png';
 import sih from './company/sih.png';
+import sail from './company/sail.png';
+import aws from './tech/aws.png';
+import python from './tech/python.png';
+import postgresql from './tech/postgresql.png';
+
 
 export {
+  sail,
+  python,
+  postgresql,
+  aws,
   logo,
   chess,
   leetcode,

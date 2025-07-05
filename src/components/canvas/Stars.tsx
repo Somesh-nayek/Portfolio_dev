@@ -3,6 +3,7 @@ import { Canvas,useFrame } from "@react-three/fiber";
 import { Points,PointMaterial,Preload } from "@react-three/drei";
 import * as random from 'maath/random/dist/maath-random.esm';
 import { BufferGeometry, Material, Points as ThreePoints } from "three";
+import { useInView } from "react-intersection-observer";
 const Stars = () => {
   const ref= useRef<ThreePoints<BufferGeometry, Material | Material[]> | null>(null);
 
@@ -31,14 +32,15 @@ const Stars = () => {
   )
 }
 const StarCanvas=()=>{
-  return<div className="w-full h-auto absolute inset-0 z-[-1]">
-    <Canvas
+  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: false });
+  return<div ref={ref} className="w-full h-auto absolute inset-0 z-[-1]">
+    {inView?<Canvas
     camera={{position:[0,0,1]}}>
       <Suspense fallback={null}>
         <Stars/>
         <Preload all/>
       </Suspense>
-    </Canvas>
+    </Canvas>:null}
   </div>
 }
 

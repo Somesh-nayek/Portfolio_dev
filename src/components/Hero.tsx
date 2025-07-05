@@ -1,10 +1,15 @@
 import {motion} from 'framer-motion';
 import { styles } from "../styles";
 import { ComputersCanvas } from "./canvas";
+import { useInView } from 'react-intersection-observer';
 
 const Hero = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
   return (
-    <section className="relative w-full h-screen">
+    <section ref={ref} className="relative w-full h-screen">
       <div
         className={`${styles.paddingX} absolute -translate-y-10 inset-0 top-[120px]
       max-w-7xl mx-auto flex flex-row  gap-5`}
@@ -27,7 +32,7 @@ const Hero = () => {
           </p>
         </div>
       </div>
-      <ComputersCanvas/>
+      {inView?<ComputersCanvas/>:null}
       <div className="absolute translate-y-[30px] xs:bottom-10 bottom-32
        w-full flex justify-center items-center">
           <a href="#about">
