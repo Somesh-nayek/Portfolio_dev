@@ -11,7 +11,7 @@ const Contact = () => {
   // const service_id=import.meta.env.VITE_SERVICE_ID;
   // const template_id=import.meta.env.VITE_TEMPLATE_ID;
   // const public_key=import.meta.env.VITE_PUBLIC_ID;
-  const handleChange=(value)=>{
+  const handleChange=(value:string | null)=>{
     console.log("Captcha value:", value);
   }
   return (
