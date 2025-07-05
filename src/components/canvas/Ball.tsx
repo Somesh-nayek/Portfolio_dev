@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
-  Decal, Float, OrbitControls, Preload
+  Decal, Float, OrbitControls
   , useTexture
 } from "@react-three/drei";
 import Loader from '../Loader'

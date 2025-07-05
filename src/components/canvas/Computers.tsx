@@ -1,10 +1,9 @@
-import { useGLTF, Preload, OrbitControls } from "@react-three/drei";
+import { useGLTF,  OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useState } from "react";
 import CanvasLoader from "../Loader";
 import { ErrorBoundary } from "react-error-boundary";
 import * as THREE from "three";
-import { useInView } from "react-intersection-observer";
 
 const Computers = ({ isMobile }: { isMobile: boolean }) => {
   const computer = useGLTF("./desktop_pc/scene.gltf");
