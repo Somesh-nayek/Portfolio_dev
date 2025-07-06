@@ -39,7 +39,7 @@ type CanvasProps = {
 const BallCanvas = ({ icon }: CanvasProps) => {
   return <div>
     <Canvas
-      frameloop="demand"
+      frameloop="always"
       dpr={[1, 2]}
       gl={{ preserveDrawingBuffer: false }}
     >
@@ -47,7 +47,6 @@ const BallCanvas = ({ icon }: CanvasProps) => {
         <OrbitControls enableZoom={false} />
         <Ball imgUrl={icon} />
       </Suspense>
-      {/* <Preload all /> */}
     </Canvas>
   </div>
 }

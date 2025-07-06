@@ -4,13 +4,13 @@ import { technologies } from "../constants";
 import { useInView } from "react-intersection-observer";
 
 const Tech = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: false, // this is important!
+  });
   return (
     <div className="flex flex-row flex-wrap justify-center gap-10">
       {technologies.map((tech) => {
-        const { ref, inView } = useInView({
-          threshold: 0.2,
-          triggerOnce: false, // this is important!
-        });
 
         return (
           <div ref={ref} className="w-28 h-28" key={tech.name}>
