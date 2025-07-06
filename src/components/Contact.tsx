@@ -13,7 +13,7 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
   const { ref, inView } = useInView({
-    threshold: 0.3,
+    threshold: 0,
     triggerOnce: false,
   });
   const handleCaptchaChange = (value: string | null) => {

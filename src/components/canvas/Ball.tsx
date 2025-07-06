@@ -37,8 +37,7 @@ type CanvasProps = {
   icon: string;
 }
 const BallCanvas = ({ icon }: CanvasProps) => {
-  return <div>
-    <Canvas
+  return<Canvas
       frameloop="always"
       dpr={[1, 2]}
       gl={{ preserveDrawingBuffer: false }}
@@ -48,7 +47,6 @@ const BallCanvas = ({ icon }: CanvasProps) => {
         <Ball imgUrl={icon} />
       </Suspense>
     </Canvas>
-  </div>
 }
 
 export default BallCanvas

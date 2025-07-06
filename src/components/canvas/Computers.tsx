@@ -62,7 +62,6 @@ const FallbackMessage = () => (
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    // setShowCanvas(true); // Delay rendering until hydration
     const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
     checkIsMobile();
     window.addEventListener("resize", checkIsMobile);

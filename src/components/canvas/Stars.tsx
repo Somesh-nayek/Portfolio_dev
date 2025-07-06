@@ -32,7 +32,7 @@ const Stars = () => {
   )
 }
 const StarCanvas=()=>{
-  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: false });
+  const { ref, inView } = useInView({ threshold: 0, triggerOnce: false });
   return<div ref={ref} className="w-full h-auto absolute inset-0 z-[-1]">
     {inView?<Canvas
     camera={{position:[0,0,1]}}>

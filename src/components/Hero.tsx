@@ -5,8 +5,8 @@ import { useInView } from 'react-intersection-observer';
 
 const Hero = () => {
   const { ref, inView } = useInView({
-    threshold: 0.2,
-    triggerOnce: true,
+    threshold: 0,
+    triggerOnce: false,
   });
   return (
     <section ref={ref} className="relative w-full h-screen">
