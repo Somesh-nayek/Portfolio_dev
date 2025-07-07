@@ -5,9 +5,10 @@ import { useInView } from 'react-intersection-observer';
 
 const Hero = () => {
   const { ref, inView } = useInView({
-    threshold: 0,
+    threshold: 0.1,
     triggerOnce: false,
   });
+  // console.log("Hero component inView:", inView);
   return (
     <section ref={ref} className="relative w-full h-screen">
       <div
@@ -32,7 +33,7 @@ const Hero = () => {
           </p>
         </div>
       </div>
-      {inView?<ComputersCanvas/>:null}
+      <ComputersCanvas inView={inView}/>
       <div className="absolute translate-y-[30px] xs:bottom-10 bottom-32
        w-full flex justify-center items-center">
           <a href="#about">

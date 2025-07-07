@@ -39,16 +39,16 @@ const services = [
 ];
 
 const technologies = [
-  { name: "TypeScript", icon: typescript },
-  { name: "Python", icon: python },
-  { name: "React JS", icon: reactjs },
   { name: "Next JS", icon: nextJs },
-  { name: "Tailwind CSS", icon: tailwind },
   { name: "Node JS", icon: nodejs },
-  { name: "MongoDB", icon: mongodb },
   { name: "PostgreSQL", icon: postgresql },
-  { name: "Docker", icon: docker },
+  { name: "MongoDB", icon: mongodb },
+  { name: "Tailwind CSS", icon: tailwind },
+  { name: "TypeScript", icon: typescript },
+  { name: "React JS", icon: reactjs },
+  { name: "Python", icon: python },
   { name: "git", icon: git },
+  { name: "Docker", icon: docker },
   { name: "figma", icon: figma },
   { name: "AWS", icon: aws },
 ];
